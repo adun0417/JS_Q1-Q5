@@ -1,0 +1,51 @@
+<html>
+<head>
+  <script>
+    var state = "false";
+    function toggleLight(){
+      var image = document.getElementById("image");
+      state = !state;
+      image.src = state? "img/on.jpg" : "img/off.jpg";
+    };
+
+
+      // 01.輸入倒數輸入欄位
+      function setTime() {
+        var input = document.getElementById("input").value;
+        var number = parseInt(input);
+        var timeLeft = number;
+        var btn = document.getElementById("start_btn")
+
+         if (isNaN(number)) {
+          alert("請輸入數字，而非文字");
+         }
+
+        var id = setInterval(countDownTimer, 1000);
+        function countDownTimer() {
+          timeLeft = timeLeft - 1 ;
+          if (timeLeft <= 0) {
+            document.getElementById("image").src = "img/off.jpg"
+            clearInterval(id);
+            btn.innerHTML = "重新計時";
+            btn.onclick = resetCount;
+          }
+          document.getElementById("timer").innerHTML = timeLeft;
+          }
+
+          function resetCount() {
+            btn.innerHTML = "倒數開始!!";
+            image.src = "img/on.jpg";
+            btn.onclick = countDownTimer;
+          }
+        }
+  </script>
+</head>
+<body>
+  <!-- HTML 語法寫在這 -->
+  <img src="img/on.jpg" id="image" alt="">
+  <button class="button" onclick="toggleLight();">on<br>-<br>off</button>
+  <div class="div" id="timer"></div>
+  <input type="text" id="input"/>
+  <button id="start_btn" onclick="setTime();">倒數開始!!</button>
+</body>
+</html>

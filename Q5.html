@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <script>
+      "use script"
+      // 01.createToDo
+      function createToDo(){
+        var todo = document.createElement("div");
+        var span = document.createElement("span");
+        var input = document.getElementById("input").value;
+        var check = document.getElementById("color").checked;
+        if (check) {
+          todo.style.color = "red";
+        } else if (!check){
+          todo.style.color = "green";
+        }
+
+        if (input == "") {
+          alert("wired! no have content");
+        }
+        span.innerHTML = input;
+        todo.appendChild(span);
+
+        // 02.add - replaceButton
+        var replaceButton = document.createElement("button");  //create button
+        replaceButton.textContent = "R" // let create button be R
+        todo.appendChild(replaceButton);// add replaceButton into todo
+
+        replaceButton.onclick = function() {
+          var input = document.getElementById("input").value;
+          this.parentNode.firstChild.innerHTML = input;
+          document.getElementById("input").value = "";
+        }
+
+        // 03.add - removeButton
+        var removeButton = document.createElement("button");
+        removeButton.textContent = "V";
+        todo.appendChild(removeButton);
+
+        removeButton.onclick = function(){
+
+        if (window.confirm("是否確定完成？")) {
+          // this.parentNode.parentNode.removeChild(this.parentNode);
+          // 知道element的名稱可以直接移除，但若不知道node的位置在哪才需要由父元素指定
+          todo.style.color = "red";
+          todo.removeChild(removeButton);
+          todo.removeChild(replaceButton);
+        }
+        }
+
+        // 04. let todo add to todolist
+        var todolist = document.getElementById("todolist");
+        todolist.appendChild(todo);
+      }
+
+    </script>
+  </head>
+  <body>
+  <div>
+    <input type="text" id="input">
+    <button onclick="createToDo()"> + </button>
+    <div id="todolist">
+    </div>
+    <form>
+      緊急: <input type="radio"  name="emergency" id="color">
+      不緊急: <input type="radio" name="noemergency">
+    </form>
+  </div>
+</body>
+</html>
